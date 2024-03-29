@@ -20,6 +20,4 @@ const NavBar = ({ onSearch }: Props) => {
 export default NavBar
 
 
-
-//  so here we have pass down propr to another compnoet call searchInput
-// so this is example of prop-drilling
+ 

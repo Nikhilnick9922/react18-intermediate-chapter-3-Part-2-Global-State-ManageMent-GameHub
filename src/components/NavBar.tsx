@@ -1,4 +1,4 @@
-import { HStack, Image } from '@chakra-ui/react'
+ import { HStack, Image } from '@chakra-ui/react'
 import logo from '../assets/logo.webp';
 import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
@@ -18,3 +18,8 @@ const NavBar = ({ onSearch }: Props) => {
 }
 
 export default NavBar
+
+
+
+//  so here we have pass down propr to another compnoet call searchInput
+// so this is example of prop-drilling

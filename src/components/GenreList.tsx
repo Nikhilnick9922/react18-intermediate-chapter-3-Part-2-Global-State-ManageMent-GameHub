@@ -7,17 +7,22 @@ import {
   ListItem,
   Spinner,
 } from "@chakra-ui/react";
-import useGenres, { Genre } from "../hooks/useGenres";
+import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
+import useGameQueryStore from "../store";
 
-interface Props {
-  onSelectGenre: (genre: Genre) => void;
-  selectedGenreId?: number; // renamed and made it optional number
-}
+// interface Props {
+//   onSelectGenre: (genre: Genre) => void;
+//   selectedGenreId?: number;  
+// }
 
-const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
+const GenreList = (
+  // { selectedGenreId, onSelectGenre }: Props
+  ) => {
   const { data, isLoading, error } = useGenres();
-
+  const selectedGenreId =  useGameQueryStore(s=>s.gameQuery.genreId);
+  const setSelectedGenreId = useGameQueryStore(s=>s.setGenreId)
+  //  setname for consistency
   if (error) return null;
 
   if (isLoading) return <Spinner />;
@@ -41,7 +46,9 @@ const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
                 whiteSpace="normal"
                 textAlign="left"
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
-                onClick={() => onSelectGenre(genre)}
+                // onClick={() => onSelectGenre(genre.)}
+                onClick={() => setSelectedGenreId(genre.id)} // changed here
+              
                 fontSize="md"
                 variant="link"
               >
@@ -56,3 +63,7 @@ const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
 };
 
 export default GenreList;
+
+
+//  remove props interface ,  and from parenthesis
+// but we need here selectedGenreId & onSelectGenreId

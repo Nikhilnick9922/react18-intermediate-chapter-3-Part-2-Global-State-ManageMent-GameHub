@@ -1,5 +1,4 @@
 import { Box, Flex, Grid, GridItem, Show } from "@chakra-ui/react";
-import { useState } from "react";
 import GameGrid from "./components/GameGrid";
 import GameHeading from "./components/GameHeading";
 import GenreList from "./components/GenreList";
@@ -7,15 +6,10 @@ import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 
-export interface GameQuery {
-  genreId?: number;
-  platformId?: number;
-  sortOrder: string;
-  searchText: string;
-}
+//  
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  // const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   return (
     <Grid
@@ -30,40 +24,43 @@ function App() {
     >
       <GridItem area="nav">
         <NavBar
-          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+          // onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenreList
-            selectedGenreId={gameQuery.genreId}
-            onSelectGenre={(genre) =>
-              setGameQuery({ ...gameQuery, genreId: genre.id })
-            }
+            // selectedGenreId={gameQuery.genreId}
+            // onSelectGenre={(genre) =>
+            //   setGameQuery({ ...gameQuery, genreId: genre.id })
+            // }
           />
         </GridItem>
       </Show>
       <GridItem area="main">
         <Box paddingLeft={2}>
-          <GameHeading gameQuery={gameQuery} />
+          <GameHeading 
+          // gameQuery={gameQuery}
+           />
           <Flex marginBottom={5}>
             <Box marginRight={5}>
               <PlatformSelector
-                selectedPlatformId={gameQuery.platformId}
-                onSelectPlatform={(platform) =>
-                  setGameQuery({ ...gameQuery, platformId: platform.id })
-                }
+                // selectedPlatformId={gameQuery.platformId}
+                // onSelectPlatform={(platform) =>
+                //   setGameQuery({ ...gameQuery, platformId: platform.id })
+                // }
               />
             </Box>
             <SortSelector
-              sortOrder={gameQuery.sortOrder}
-              onSelectSortOrder={(sortOrder) =>
-                setGameQuery({ ...gameQuery, sortOrder })
-              }
+              // sortOrder={gameQuery.sortOrder}
+              // onSelectSortOrder={(sortOrder) =>
+              //   setGameQuery({ ...gameQuery, sortOrder })
+              // }
             />
           </Flex>
         </Box>
-        <GameGrid gameQuery={gameQuery} />
+        {/* <GameGrid gameQuery={gameQuery} /> */}
+        <GameGrid />
       </GridItem>
     </Grid>
   );
@@ -71,14 +68,35 @@ function App() {
 
 export default App;
 
-//  2. Exercise- Setting Up a Zustand Store
+//   Exercise- Removing Props
 
-//  so don't do anything , just setup zustand store for holding gameQuery object
+//  now that we have setup our store , we need to modify each component
+//  and have it  to get gameQuery object directly from the store , instead 
+// of passing through the props
 
-//  npm i zustand@4.3.7
+// GAMEQUERY HAS CURRENT STATE IN THAT THERE IS ALL SELECTED PROPERTIES
 
-//  src -> store.ts  
+//  now start with app comonent , we don't need state , 
+// since we are going to manage state using zustand
 
-//  right now we need single store for holding the game-query object
-//   later as our application grows we might need, others stores , then we comeback and 
-// rethink our project structure
+//  now look for anywhere we passing gameQuery via props , like navbar ,genrelist and so on
+//  so refactor each of those component and have them get state directly from the store
+
+// 1st NavBar 
+//  remove state from navbar in app.tsx
+// go to the navbar
+
+// 2nd now do same for genreList
+
+
+//  3rd is gameHeading component
+// 
+
+// 4th is platformSelector component
+
+// 5th is solrtSelector component
+
+
+//  last componet is gameGrid
+
+//  all done , now open reactquery dev tools

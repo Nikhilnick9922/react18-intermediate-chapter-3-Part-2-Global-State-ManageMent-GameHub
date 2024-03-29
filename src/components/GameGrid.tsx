@@ -1,17 +1,13 @@
 import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { GameQuery } from "../App";
-import useGames from "../hooks/useGames";
+ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
 
-interface Props {
-  gameQuery: GameQuery;
-}
-
-const GameGrid = ({ gameQuery }: Props) => {
+ 
+const GameGrid = ( ) => {
   const {
     data,
     error,
@@ -19,7 +15,7 @@ const GameGrid = ({ gameQuery }: Props) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useGames(gameQuery);
+  } = useGames( );
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   if (error) return <Text>{error.message}</Text>;
@@ -61,3 +57,9 @@ const GameGrid = ({ gameQuery }: Props) => {
 };
 
 export default GameGrid;
+
+
+//  now in this component we should get gameQuery and pass it the games hook
+//  but this is unncessory because have this hook to get gamequery directly from the store
+
+//  remove gamequery from useGames hook here , and go to useGames.ts

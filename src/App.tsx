@@ -6,11 +6,7 @@ import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
 
-//  
-
 function App() {
-  // const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
   return (
     <Grid
       templateAreas={{
@@ -23,43 +19,24 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar
-          // onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
-        />
+        <NavBar />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <GenreList
-            // selectedGenreId={gameQuery.genreId}
-            // onSelectGenre={(genre) =>
-            //   setGameQuery({ ...gameQuery, genreId: genre.id })
-            // }
-          />
+          <GenreList />
         </GridItem>
       </Show>
+
       <GridItem area="main">
         <Box paddingLeft={2}>
-          <GameHeading 
-          // gameQuery={gameQuery}
-           />
+          <GameHeading />
           <Flex marginBottom={5}>
             <Box marginRight={5}>
-              <PlatformSelector
-                // selectedPlatformId={gameQuery.platformId}
-                // onSelectPlatform={(platform) =>
-                //   setGameQuery({ ...gameQuery, platformId: platform.id })
-                // }
-              />
+              <PlatformSelector />
             </Box>
-            <SortSelector
-              // sortOrder={gameQuery.sortOrder}
-              // onSelectSortOrder={(sortOrder) =>
-              //   setGameQuery({ ...gameQuery, sortOrder })
-              // }
-            />
+            <SortSelector />
           </Flex>
         </Box>
-        {/* <GameGrid gameQuery={gameQuery} /> */}
         <GameGrid />
       </GridItem>
     </Grid>
@@ -68,35 +45,17 @@ function App() {
 
 export default App;
 
-//   Exercise- Removing Props
-
-//  now that we have setup our store , we need to modify each component
-//  and have it  to get gameQuery object directly from the store , instead 
-// of passing through the props
-
-// GAMEQUERY HAS CURRENT STATE IN THAT THERE IS ALL SELECTED PROPERTIES
-
-//  now start with app comonent , we don't need state , 
-// since we are going to manage state using zustand
-
-//  now look for anywhere we passing gameQuery via props , like navbar ,genrelist and so on
-//  so refactor each of those component and have them get state directly from the store
-
-// 1st NavBar 
-//  remove state from navbar in app.tsx
-// go to the navbar
-
-// 2nd now do same for genreList
+//  4. Discussion- Building Reusable Components
 
 
-//  3rd is gameHeading component
-// 
+// problem is component is less reusable because they rely on store existence to   function
 
-// 4th is platformSelector component
+//  in constast  passsing props makes our comopnet more self contains and resuable 
+// because they don't rely on esternal data source
+//  in our case it's highly unlikely we are going to reuse component with differnt kind of data sets
 
-// 5th is solrtSelector component
+// example genreList always want to know selectedGenre in store
 
+// if situration changes we can always modify these components and pass data through  props 
 
-//  last componet is gameGrid
-
-//  all done , now open reactquery dev tools
+//  there is no-one-size-fit rule for managing state in react

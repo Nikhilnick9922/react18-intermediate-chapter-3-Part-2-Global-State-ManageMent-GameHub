@@ -5,18 +5,13 @@ import usePlatform from "../hooks/usePlatform";
 import usePlatforms from "../hooks/usePlatforms";
 import useGameQueryStore from "../store";
 
-// interface Props {
-//   onSelectPlatform: (platform: Platform) => void;
-//   selectedPlatformId?: number;
-// }
-
-const PlatformSelector = ( ) => {
+const PlatformSelector = () => {
   const { data, error } = usePlatforms();
-  
-  const selectedPlatformId = useGameQueryStore(s=>s.gameQuery.platformId)
+
+  const selectedPlatformId = useGameQueryStore((s) => s.gameQuery.platformId);
   const selectedPlatform = usePlatform(selectedPlatformId); // added here
 
-  const setSelectPlatformID = useGameQueryStore(s=>s.setPlatformId)
+  const setSelectPlatformID = useGameQueryStore((s) => s.setPlatformId);
 
   if (error) return null;
 
@@ -28,8 +23,7 @@ const PlatformSelector = ( ) => {
       <MenuList>
         {data?.results.map((platform) => (
           <MenuItem
-            // onClick={() => onSelectPlatform(platform)}
-            onClick={() => setSelectPlatformID(platform.id)}  // remember to pass id not platform object
+            onClick={() => setSelectPlatformID(platform.id)}
             key={platform.id}
           >
             {platform.name}
@@ -41,7 +35,3 @@ const PlatformSelector = ( ) => {
 };
 
 export default PlatformSelector;
-
-
-
-// pay attention to naming
